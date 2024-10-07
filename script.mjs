@@ -7,12 +7,17 @@ let score = 0;
 
 // Fetch and display a trivia question
 async function loadQuestion() {
-    const questionData = await getTriviaQuestion();  // Fetch the question
-    correctAnswer = questionData.correct_answer;  // Store the correct answer
-    showQuestion(questionData);  // Display the question and options
+    try {
+        const questionData = await getTriviaQuestion();  // Fetch the question
+        correctAnswer = questionData.correct_answer;  // Store the correct answer
+        showQuestion(questionData);  // Display the question and options
 
-    // Re-enable buttons for the new question
-    enableOptionButtons();
+        // Re-enable buttons for the new question
+        enableOptionButtons();
+    } catch (error) {
+        document.getElementById('question').innerText = 'Error loading question. Please try again.';
+        document.getElementById('options-container').innerHTML = '';  // Clear the options
+    }
 }
 
 // Handle answer click
