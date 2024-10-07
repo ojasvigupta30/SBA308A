@@ -1,5 +1,5 @@
-import { getTriviaQuestion } from './api.js';
-import { showQuestion, showFeedback } from './ui.js';
+import { getTriviaQuestion } from './api.mjs';
+import { showQuestion, showFeedback } from './ui.mjs';
 
 // Variables to store the correct answer and score
 let correctAnswer = '';
