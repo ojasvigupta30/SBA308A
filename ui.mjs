@@ -14,7 +14,7 @@ export function showQuestion(questionData) {
     document.getElementById(`option-4`).innerHTML = options[3];
 }
 
-// Shuffle the options
+// Shuffle the options so that the correct answer is not the same option always
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
