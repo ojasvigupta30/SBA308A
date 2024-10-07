@@ -10,10 +10,15 @@ async function loadQuestion() {
     const questionData = await getTriviaQuestion();  // Fetch the question
     correctAnswer = questionData.correct_answer;  // Store the correct answer
     showQuestion(questionData);  // Display the question and options
+
+    // Re-enable buttons for the new question
+    enableOptionButtons();
 }
 
 // Handle answer click
 function checkAnswer(userAnswer) {
+    disableOptionButtons();  // Disable buttons once an answer is selected
+
     if (userAnswer === correctAnswer) {
         score++;  // Increment score if the answer is correct
         showFeedback(true, correctAnswer);  // Show "Correct!" feedback
@@ -26,19 +31,34 @@ function checkAnswer(userAnswer) {
     document.getElementById('next-question').classList.remove('hidden');
 }
 
+// Enable buttons for selecting answers
+function enableOptionButtons() {
+    const optionButtons = document.querySelectorAll('.option');
+    optionButtons.forEach(button => {
+        button.disabled = false;  // Enable button
+        button.addEventListener('click', handleOptionClick);  // Add event listener
+    });
+}
+
+// Disable buttons after an answer is selected
+function disableOptionButtons() {
+    const optionButtons = document.querySelectorAll('.option');
+    optionButtons.forEach(button => {
+        button.disabled = true;  // Disable button
+        button.removeEventListener('click', handleOptionClick);  // Remove event listener
+    });
+}
+
+// Handle option button click
+function handleOptionClick(event) {
+    checkAnswer(event.target.innerText);  // Check if the selected answer is correct
+}
+
 // Reset for the next question
 function resetGame() {
     document.getElementById('feedback').innerText = '';  // Clear feedback
     document.getElementById('next-question').classList.add('hidden');  // Hide "Next Question" button
     loadQuestion();  // Load a new question
-}
-
-// Add event listeners for the option buttons
-const optionButtons = document.querySelectorAll('.option');
-for (let i = 0; i < optionButtons.length; i++) {
-    optionButtons[i].addEventListener('click', function(event) {
-        checkAnswer(event.target.innerText);  // Check if the selected answer is correct
-    });
 }
 
 // Add event listener for "Next Question" button
