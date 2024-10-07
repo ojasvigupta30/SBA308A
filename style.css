@@ -1,44 +1,190 @@
+/* Global body styles to resemble a colorful nerdy terminal screen */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #000;
+    background-image: radial-gradient(circle, #222, #000);
+    color: #0f0;
+    margin: 0;
+    padding: 0;
     text-align: center;
-    background-color: #f0f0f0;
+    height: 100vh;
 }
 
+/* Nerdy dynamic heading with bright neon glow and retro pixelated look */
+h1 {
+    margin-bottom: 20px;
+    font-size: 60px;
+    letter-spacing: 5px;
+    font-family: 'Press Start 2P', cursive; /* Retro pixelated font */
+    background: linear-gradient(90deg, #00ff00, #00ffff, #ff00ff, #ffff00); /* Bright neon colors */
+    background-size: 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+    animation: nerdyGlow 1.5s ease-in-out infinite alternate, glitch 2.5s infinite linear;
+    z-index: 1;
+}
+
+/* Bright neon glow effect */
+@keyframes nerdyGlow {
+    0%, 100% {
+        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ffff, 0 0 30px #ff00ff, 0 0 40px #ffff00;
+    }
+    50% {
+        text-shadow: 0 0 15px #00ffff, 0 0 30px #ff00ff, 0 0 40px #ffff00, 0 0 50px #00ff00;
+    }
+}
+
+
+/* Game container with glowing effect */
 .game-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px 30px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.5);
+    border: 1px solid #0ff;
 }
 
-#options-container button {
-    padding: 10px;
+/* Styling the question text */
+#question {
+    font-size: 22px;
+    color: #0ff;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+}
+
+/* Option buttons styled with various neon colors */
+#options-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.option {
+    padding: 15px 30px;
     margin: 10px;
-    width: 150px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
+    background-color: #222;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.3s ease;
+    width: 180px;
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
 }
 
-#options-container button:hover {
-    background-color: #0056b3;
+.option:nth-child(1) {
+    border-color: #ff00ff; /* Magenta */
+}
+
+.option:nth-child(2) {
+    border-color: #00ff00; /* Green */
+}
+
+.option:nth-child(3) {
+    border-color: #00ffff; /* Cyan */
+}
+
+.option:nth-child(4) {
+    border-color: #ffbf00; /* Yellow */
+}
+
+.option:hover {
+    background-color: #0f0;
+    color: #000;
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.6);
+    transform: translateY(-3px);
+}
+
+.option:disabled {
+    background-color: #444;
+    color: #888;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Feedback styles for correct and incorrect answers */
+#feedback {
+    font-size: 20px;
+    margin-top: 20px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 10px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+#feedback.correct {
+    background-color: #28a745; /* Green */
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.5);
+}
+
+#feedback.incorrect {
+    background-color: #dc3545; /* Red */
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.5);
+}
+
+/* Score styling */
+#score {
+    font-size: 22px;
+    margin-top: 20px;
+    color: #ffbf00;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Styling the "Next Question" button with a neon effect */
+#next-question {
+    margin-top: 40px;
+    padding: 15px 40px;
+    background-color: #00ffff; /* Cyan */
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
+}
+
+#next-question:hover {
+    background-color: #00ff00; /* Green on hover */
+    box-shadow: 0 6px 20px rgba(0, 255, 0, 0.6);
+    transform: translateY(-3px);
 }
 
 .hidden {
     display: none;
 }
 
-#feedback {
-    font-size: 18px;
-    margin-top: 10px;
-}
+/* Responsive design for smaller devices */
+@media (max-width: 768px) {
+    #question {
+        font-size: 18px;
+    }
 
-#feedback.correct {
-    color: green;
-}
+    .option {
+        width: 100%;
+        padding: 10px;
+    }
 
-#feedback.incorrect {
-    color: red;
+    #next-question {
+        width: 100%;
+    }
 }
