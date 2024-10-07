@@ -76,7 +76,7 @@ function disableOptionButtons() {
 
 // Handle option button click
 function handleOptionClick(eve) {
-    checkAnswer(eve.target.innerText);  // Check the selected answer
+    checkAnswer(eve.target.innerHTML);  // Check the selected answer
 }
 
 // Reset for the next question
