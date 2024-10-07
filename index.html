@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Quiz Game</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <script defer type="module" src="./script.js"></script>
+
+</head>
+
+<body>
+    <div class="game-container">
+        <h1>Trivia Quiz Game</h1>
+        <div id="question-container">
+            <p id="question">Loading question...</p>
+            <div id="options-container">
+                <button class="option" id="option-1"></button>
+                <button class="option" id="option-2"></button>
+                <button class="option" id="option-3"></button>
+                <button class="option" id="option-4"></button>
+            </div>
+        </div>
+    </div>
+
+    
+    <p>Score: <span id="score">0</span></p>
+    <div id="feedback" class="hidden"></div>
+    <button id="next-question" class="hidden">Next Question</button>
+
+
+</body>
+
+</html>
