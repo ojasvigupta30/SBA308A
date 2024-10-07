@@ -36,7 +36,6 @@ function enableOptionButtons() {
     const optionButtons = document.querySelectorAll('.option');
     optionButtons.forEach(button => {
         button.disabled = false;  // Enable button
-        button.addEventListener('click', handleOptionClick);  // Add event listener
     });
 }
 
@@ -45,13 +44,7 @@ function disableOptionButtons() {
     const optionButtons = document.querySelectorAll('.option');
     optionButtons.forEach(button => {
         button.disabled = true;  // Disable button
-        button.removeEventListener('click', handleOptionClick);  // Remove event listener
     });
-}
-
-// Handle option button click
-function handleOptionClick(event) {
-    checkAnswer(event.target.innerText);  // Check if the selected answer is correct
 }
 
 // Reset for the next question
@@ -60,6 +53,17 @@ function resetGame() {
     document.getElementById('next-question').classList.add('hidden');  // Hide "Next Question" button
     loadQuestion();  // Load a new question
 }
+
+// Handle option button click
+function handleOptionClick(event) {
+    checkAnswer(event.target.innerText);  // Check if the selected answer is correct
+}
+
+// Add event listeners for option buttons
+const optionButtons = document.querySelectorAll('.option');
+optionButtons.forEach(button => {
+    button.addEventListener('click', handleOptionClick);  // Attach event listeners once
+});
 
 // Add event listener for "Next Question" button
 document.getElementById('next-question').addEventListener('click', resetGame);
