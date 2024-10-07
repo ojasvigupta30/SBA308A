@@ -1,77 +1,72 @@
 import { getTriviaQuestion } from './api.mjs';
 import { showQuestion, showFeedback } from './ui.mjs';
 
-// Variables to store the correct answer and score
-let correctAnswer = '';
-let score = 0;
+let correctAnswer = '';  // Store correct answer
+let score = 0;  // Store player's score
 
-// Fetch and display a trivia question
+// Load and display the first question
 async function loadQuestion() {
     try {
-        const questionData = await getTriviaQuestion();  // Fetch the question
-        correctAnswer = questionData.correct_answer;  // Store the correct answer
-        showQuestion(questionData);  // Display the question and options
+        const questionData = await getTriviaQuestion();
+        correctAnswer = questionData.correct_answer;
+        showQuestion(questionData);
 
-        // Re-enable buttons for the new question
+        // Reset buttons and feedback for the new question
         enableOptionButtons();
+        document.getElementById('feedback').innerText = '';
     } catch (error) {
         document.getElementById('question').innerText = 'Error loading question. Please try again.';
-        document.getElementById('options-container').innerHTML = '';  // Clear the options
+        document.getElementById('options-container').innerHTML = '';
     }
 }
 
-// Handle answer click
-function checkAnswer(userAnswer) {
-    disableOptionButtons();  // Disable buttons once an answer is selected
+// Handle user's answer selection
+function checkAnswer(selectedAnswer) {
+    disableOptionButtons();  // Disable buttons after selection
 
-    if (userAnswer === correctAnswer) {
-        score++;  // Increment score if the answer is correct
+    if (selectedAnswer === correctAnswer) {
+        score++;  // Increase score for correct answer
         showFeedback(true, correctAnswer);  // Show "Correct!" feedback
     } else {
-        showFeedback(false, correctAnswer);  // Show the correct answer in feedback
+        showFeedback(false, correctAnswer);  // Show the correct answer
     }
 
-    // Update the score and show the "Next Question" button
+    // Update score and show "Next Question" button
     document.getElementById('score').innerText = score;
     document.getElementById('next-question').classList.remove('hidden');
 }
 
-// Enable buttons for selecting answers
+// Enable answer buttons for user interaction
 function enableOptionButtons() {
     const optionButtons = document.querySelectorAll('.option');
     optionButtons.forEach(button => {
-        button.disabled = false;  // Enable button
+        button.disabled = false;
+        button.addEventListener('click', handleOptionClick);
     });
 }
 
-// Disable buttons after an answer is selected
+// Disable buttons to prevent further clicks after an answer is selected
 function disableOptionButtons() {
     const optionButtons = document.querySelectorAll('.option');
     optionButtons.forEach(button => {
-        button.disabled = true;  // Disable button
+        button.disabled = true;
+        button.removeEventListener('click', handleOptionClick);
     });
-}
-
-// Reset for the next question
-function resetGame() {
-    document.getElementById('feedback').innerText = '';  // Clear feedback
-    document.getElementById('next-question').classList.add('hidden');  // Hide "Next Question" button
-    loadQuestion();  // Load a new question
 }
 
 // Handle option button click
 function handleOptionClick(event) {
-    checkAnswer(event.target.innerText);  // Check if the selected answer is correct
+    checkAnswer(event.target.innerText);  // Check if the answer is correct
 }
 
-// Add event listeners for option buttons
-const optionButtons = document.querySelectorAll('.option');
-optionButtons.forEach(button => {
-    button.addEventListener('click', handleOptionClick);  // Attach event listeners once
-});
+// Reset for the next question
+function resetGame() {
+    document.getElementById('next-question').classList.add('hidden');  // Hide "Next Question" button
+    loadQuestion();  // Load a new question
+}
 
-// Add event listener for "Next Question" button
+// Add event listener for the "Next Question" button
 document.getElementById('next-question').addEventListener('click', resetGame);
 
-// Load the first question when the page is ready
+// Load the first question when the page loads
 document.addEventListener('DOMContentLoaded', loadQuestion);

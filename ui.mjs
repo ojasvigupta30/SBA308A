@@ -1,14 +1,11 @@
-// Display the question and answer options
+// Display the question and options
 export function showQuestion(questionData) {
     // Set the question text
     document.getElementById('question').innerText = questionData.question;
 
     // Combine correct and incorrect answers, then shuffle them
     const options = [questionData.correct_answer, ...questionData.incorrect_answers];
-    for (let i = options.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));  // Shuffle the options
-        [options[i], options[j]] = [options[j], options[i]];
-    }
+    shuffleArray(options);  // Shuffle options
 
     // Assign shuffled options to buttons
     document.getElementById('option-1').innerText = options[0];
@@ -17,9 +14,22 @@ export function showQuestion(questionData) {
     document.getElementById('option-4').innerText = options[3];
 }
 
-// Display feedback based on user answer
+// Helper function to shuffle the options
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+// Display feedback based on user's answer
 export function showFeedback(isCorrect, correctAnswer) {
     const feedback = document.getElementById('feedback');
-    feedback.innerText = isCorrect ? 'Correct!' : 'Wrong! The correct answer was: ' + correctAnswer;
-    feedback.className = isCorrect ? 'correct' : 'incorrect';
+    if (isCorrect) {
+        feedback.innerText = 'Correct!';
+        feedback.className = 'correct';
+    } else {
+        feedback.innerText = `Wrong! The correct answer was: ${correctAnswer}`;
+        feedback.className = 'incorrect';
+    }
 }
