@@ -27,7 +27,7 @@
 This game uses the **Open Trivia Database API** to fetch multiple-choice trivia questions in real-time. The Open Trivia API is a free, open-source API that provides trivia questions across various categories and difficulties.
 
 ### How the API is Used:
-- **Endpoint**: The game sends a GET request to the API’s endpoint `[Open Trivia API](https://opentdb.com/api.php?amount=20&type=multiple)` to fetch trivia questions.
+- **Endpoint**: The game sends a GET request to the API’s endpoint [Open Trivia API](https://opentdb.com/api.php?amount=20&type=multiple) to fetch trivia questions.
 - **Parameters**:
   - **amount**: This specifies the number of trivia questions to be retrieved. In this game, the default is set to 20 questions, but only one is used per round.
   - **type**: The type is set to `multiple`, which indicates that the API will return questions with multiple-choice answers (1 correct and 3 incorrect answers).
